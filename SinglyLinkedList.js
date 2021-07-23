@@ -111,21 +111,6 @@ class LinkedList {
 		}
 	}
 
-	// clear list
-	clearList() {
-		this.head = null;
-		this.size = 0;
-	}
-
-	// print list data
-	printListData() {
-		let current = this.head;
-		while (current) {
-			console.log(current.data);
-			current = current.next;
-		}
-	}
-
 	// delete node without access to head pointer
 	deleteWithoutHead(node) {
 		// if linked list is empty
@@ -145,13 +130,50 @@ class LinkedList {
 			this.size--;
 		}
 	}
+
+	// Reverses the list recursively.
+	reverseListRecursively(head = this.head) {
+		// Base case
+		if (head === null || head.next === null) return head;
+
+		// recursively calling the function.
+		let newHead = this.reverseListRecursively(head.next);
+
+		// reversing the nodes.
+		head.next.next = head;
+
+		// setting the next pointer of the new tail to null.
+		head.next = null;
+
+		// Setting the new head pointer.
+		this.head = newHead;
+		return newHead;
+	}
+
+	// clear list
+	clearList() {
+		this.head = null;
+		this.size = 0;
+	}
+
+	// print list data
+	printListData() {
+		let current = this.head;
+		while (current) {
+			console.log(current.data);
+			current = current.next;
+		}
+	}
 }
 
 const ll = new LinkedList();
 
-ll.insertFirst(100);
-ll.insertLast(200);
-ll.insertLast(300);
-ll.insertAt(1, 500);
+ll.insertFirst(1);
+ll.insertLast(2);
+ll.insertLast(3);
+ll.insertLast(4);
+ll.insertLast(5);
+ll.insertLast(6);
+ll.reverseListRecursively();
 // ll.deleteWithoutHead(ll.getAt(1));
 ll.printListData();
