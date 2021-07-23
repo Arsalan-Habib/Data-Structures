@@ -70,8 +70,8 @@ class LinkedList {
 		let i = 0;
 		while (current && i <= index) {
 			if (i === index) {
-				console.log(current.data);
-				return;
+				// console.log(current.data);
+				return current;
 			} else {
 				current = current.next;
 				i++;
@@ -125,6 +125,26 @@ class LinkedList {
 			current = current.next;
 		}
 	}
+
+	// delete node without access to head pointer
+	deleteWithoutHead(node) {
+		// if linked list is empty
+		if (node.data === null) {
+			console.log("Linked List empty.");
+			return;
+		} else if (node.next === null) {
+			console.log("Tail cannot be removed without head pointer.");
+		} else {
+			// storing the next nodes data in a temp variable.
+			let temp = node.next;
+			// copying next nodes data to current one.
+			node.data = temp.data;
+			// setting current node's next pointer to the next pointer of the next node.
+			node.next = temp.next;
+
+			this.size--;
+		}
+	}
 }
 
 const ll = new LinkedList();
@@ -132,6 +152,6 @@ const ll = new LinkedList();
 ll.insertFirst(100);
 ll.insertLast(200);
 ll.insertLast(300);
-ll.removeAt(1);
-
+ll.insertAt(1, 500);
+// ll.deleteWithoutHead(ll.getAt(1));
 ll.printListData();
